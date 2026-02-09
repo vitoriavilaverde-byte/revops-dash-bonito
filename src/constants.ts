@@ -215,18 +215,21 @@ export const CUSTOMER_SEGMENTS: CustomerSegment[] = [
 
 // --- CAMPAIGNS DATA ---
 
+type KPITrend = "up" | "down" | "neutral";
+type KPIColor = "violet" | "emerald" | "orange" | "blue";
+
 export const CAMPAIGN_KPIS = [
-  { label: 'Receita Gerada', value: 'R$ 886K', change: 18.4, trend: 'up', icon: DollarSign, color: 'emerald' },
-  { label: 'ROI Médio', value: '1,495%', change: 12.7, trend: 'up', icon: TrendingUp, color: 'violet' },
-  { label: 'CAC (Custo de Aquisição)', value: 'R$ 142', change: -8.3, trend: 'down', icon: Users, color: 'blue' },
-  { label: 'LTV:CAC Ratio', value: '4.2:1', change: 5.8, trend: 'up', icon: Award, color: 'orange' },
-] satisfies ReadonlyArray<{
-  label: KPICardProps["label"];
-  value: KPICardProps["value"];
-  change: KPICardProps["change"];
-  trend: KPICardProps["trend"];
-  icon: NonNullable<KPICardProps["icon"]>;
-  color: NonNullable<KPICardProps["color"]>;
+  { label: "Receita Gerada", value: "R$ 886K", change: 18.4, trend: "up", icon: DollarSign, color: "emerald" },
+  { label: "ROI Médio", value: "1,495%", change: 12.7, trend: "up", icon: TrendingUp, color: "violet" },
+  { label: "CAC (Custo de Aquisição)", value: "R$ 142", change: -8.3, trend: "down", icon: Users, color: "blue" },
+  { label: "LTV:CAC Ratio", value: "4.2:1", change: 5.8, trend: "up", icon: Award, color: "orange" },
+] as const satisfies ReadonlyArray<{
+  label: string;
+  value: string;
+  change: number;
+  trend: KPITrend;
+  icon: any;
+  color: KPIColor;
   context?: string;
 }>;
 
