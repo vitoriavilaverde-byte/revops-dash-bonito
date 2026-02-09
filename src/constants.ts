@@ -1,7 +1,16 @@
 
 import type { RevenueData, Lead, PipelineStage, CustomerSegment, Campaign, TimelineEvent, SCurvePoint, DistributionPoint, MatrixCell, PageMetric, Tenant, KPI } from './types';
 import { Users, DollarSign, Award, MousePointerClick, Clock, Activity, Filter, Target, Briefcase, TrendingUp, Heart, MessageSquare, Zap, ShieldCheck } from 'lucide-react';
-
+export type Trend = "up" | "down" | "neutral";
+export type CampaignKPI = {
+  label: string;
+  value: string;
+  change: number;
+  trend: Trend;
+  icon: any;
+  color: string;
+  context?: string;
+};
 export const TENANTS: Tenant[] = [
   { id: 't1', name: 'Acme Corp (B2B)', logo: 'AC' },
   { id: 't2', name: 'Shopify Store (B2C)', logo: 'SS' },
