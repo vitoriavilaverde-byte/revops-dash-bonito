@@ -40,17 +40,8 @@ export const CampaignsView: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {CAMPAIGN_KPIS.map((kpi, idx) => (
-  <KPICard
-    key={idx}
-    label={kpi.label}
-    value={kpi.value}
-    change={kpi.change}
-    trend={kpi.trend as "up" | "down" | "neutral"}
-    icon={kpi.icon}
-    color={kpi.color}
-    context={(kpi as any).context}
-  />
+{CAMPAIGN_KPIS.map((kpi, idx) => (
+  <KPICard key={idx} {...kpi} />
 ))}
       </div>
 
