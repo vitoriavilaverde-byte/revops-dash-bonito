@@ -2,6 +2,7 @@
 import type { RevenueData, Lead, PipelineStage, CustomerSegment, Campaign, TimelineEvent, SCurvePoint, DistributionPoint, MatrixCell, PageMetric, Tenant, KPI } from './types';
 import { Users, DollarSign, Award, MousePointerClick, Clock, Activity, Filter, Target, Briefcase, TrendingUp, Heart, MessageSquare, Zap, ShieldCheck } from 'lucide-react';
 import type { KPICardProps } from "./components/ui/KPICards";
+import type { FunnelStep, DataRun } from "./types";
 export type Trend = "up" | "down" | "neutral";
 export type CampaignKPI = {
   label: string;
