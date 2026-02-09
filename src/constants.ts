@@ -1,6 +1,7 @@
 
 import type { RevenueData, Lead, PipelineStage, CustomerSegment, Campaign, TimelineEvent, SCurvePoint, DistributionPoint, MatrixCell, PageMetric, Tenant, KPI } from './types';
 import { Users, DollarSign, Award, MousePointerClick, Clock, Activity, Filter, Target, Briefcase, TrendingUp, Heart, MessageSquare, Zap, ShieldCheck } from 'lucide-react';
+import type { KPICardProps } from "./components/ui/KPICards";
 export type Trend = "up" | "down" | "neutral";
 export type CampaignKPI = {
   label: string;
@@ -218,15 +219,7 @@ export const CAMPAIGN_KPIS = [
   { label: 'ROI Médio', value: '1,495%', change: 12.7, trend: 'up', icon: TrendingUp, color: 'violet' },
   { label: 'CAC (Custo de Aquisição)', value: 'R$ 142', change: -8.3, trend: 'down', icon: Users, color: 'blue' },
   { label: 'LTV:CAC Ratio', value: '4.2:1', change: 5.8, trend: 'up', icon: Award, color: 'orange' },
-] satisfies Array<{
-  label: string;
-  value: string;
-  change: number;
-  trend: "up" | "down" | "neutral";
-  icon: any;
-  color: string;
-  context?: string;
-}>;
+] satisfies KPICardProps[];
 
 export const REVENUE_PIPELINE_TREND_DATA = [
   { month: 'Ago', pipeline: 1200 },
