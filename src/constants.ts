@@ -220,7 +220,15 @@ export const CAMPAIGN_KPIS = [
   { label: 'ROI Médio', value: '1,495%', change: 12.7, trend: 'up', icon: TrendingUp, color: 'violet' },
   { label: 'CAC (Custo de Aquisição)', value: 'R$ 142', change: -8.3, trend: 'down', icon: Users, color: 'blue' },
   { label: 'LTV:CAC Ratio', value: '4.2:1', change: 5.8, trend: 'up', icon: Award, color: 'orange' },
-] satisfies KPICardProps[];
+] satisfies ReadonlyArray<{
+  label: KPICardProps["label"];
+  value: KPICardProps["value"];
+  change: KPICardProps["change"];
+  trend: KPICardProps["trend"];
+  icon: NonNullable<KPICardProps["icon"]>;
+  color: NonNullable<KPICardProps["color"]>;
+  context?: string;
+}>;
 
 export const REVENUE_PIPELINE_TREND_DATA = [
   { month: 'Ago', pipeline: 1200 },
