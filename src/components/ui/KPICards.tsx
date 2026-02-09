@@ -8,7 +8,7 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export KPICardProps {
+export interface KPICardProps { KPICardProps {
   label: string;
   value: string;
   change: number;
