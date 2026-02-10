@@ -7,10 +7,10 @@ type KpisResp = {
 };
 
 export default function App() {
-  const API = String(
-    import.meta.env.VITE_API_URL || "https://revops-api-614980035835.us-east1.run.app"
-  ).replace(/\/$/, "");
-
+ const API_BASE = String(
+  import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE || ""
+).replace(/\/$/, "");
+  
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
