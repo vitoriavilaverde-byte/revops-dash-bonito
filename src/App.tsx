@@ -44,10 +44,16 @@ const App = () => {
   const [selectedTenant, setSelectedTenant] = useState<Tenant>(TENANTS[0]);
   const [isTenantMenuOpen, setIsTenantMenuOpen] = useState(false);
 type UserRole = "manager" | "user";
+
 const [role, setRole] = useState<UserRole>(() => {
   const saved = localStorage.getItem("revops:role");
-  return (saved === "manager" || saved === "user") ? saved : "user";
+  return saved === "manager" || saved === "user" ? saved : "user";
 });
+
+const setUserRole = (r: UserRole) => {
+  setRole(r);
+  localStorage.setItem("revops:role", r);
+};
   const setUserRole = (r: UserRole) => {
   setRole(r);
   localStorage.setItem("revops:role", r);
