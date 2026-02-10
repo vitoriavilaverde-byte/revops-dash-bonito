@@ -152,9 +152,11 @@ export const FrameworkView: React.FC<{ tenantId: string; tenantName: string }> =
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-slate-900 mb-3 tracking-tight">
-            A Camada Perdida: O Dashboard do Operador
+            Estratégia de Marketing Aplicada
           </h2>
-
+<div className="mt-2 text-[10px] font-extrabold text-rose-600 tracking-widest uppercase">
+  BUILD: framework-v2
+</div>
           <div className="text-xs font-extrabold text-slate-500 uppercase tracking-widest">
             Tenant selecionado:{" "}
             <span className="text-violet-700">{tenantName}</span>
