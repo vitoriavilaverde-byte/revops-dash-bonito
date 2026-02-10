@@ -70,16 +70,17 @@ const SidebarItem = ({
 );
 
 const App: React.FC = () => {
-  const API_BASE = useMemo(() => {
-    const raw =
+  // ✅ API base correto (prod vem do .env.production)
+  const apiBase = useMemo(() => {
+    const base =
       import.meta.env.VITE_API_URL ||
       import.meta.env.VITE_API_BASE ||
       "https://revops-api-614980035835.us-east1.run.app";
-    const cleaned = String(raw).replace(/\/$/, "");
-    // opcional: expõe pra debug e pra componentes que queiram ler sem prop drilling
-    (window as any).__REVOPS_API_BASE__ = cleaned;
-    return cleaned;
+    return String(base).replace(/\/$/, "");
   }, []);
+
+  // “ponte” simples pra qualquer componente usar sem refatorar tudo
+  (globalThis as any).__REVOPS_API_BASE__ = apiBase;
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState<TabKey>("dashboard");
@@ -122,7 +123,11 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen bg-slate-50 text-slate-900 overflow-hidden font-sans selection:bg-violet-200">
+    <div
+      className="flex h-screen bg-slate-50 text-slate-900 overflow-hidden font-sans selection:bg-violet-200"
+      data-api-base={apiBase}
+      data-tenant-id={selectedTenant?.id}
+    >
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r border-slate-200 flex flex-col shrink-0 shadow-sm z-20">
         <div className="p-6 flex items-center gap-3">
@@ -225,12 +230,7 @@ const App: React.FC = () => {
         </div>
 
         <div className="p-4 border-t border-slate-200 bg-slate-50">
-          <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">
-            API (prod)
-          </div>
-          <div className="text-xs font-mono text-slate-600 break-all">{API_BASE}</div>
-
-          <div className="mt-4 flex items-center gap-3">
+          <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-slate-200 to-slate-300 flex items-center justify-center text-xs font-bold text-slate-600 border border-slate-300">
               JD
             </div>
@@ -242,13 +242,12 @@ const App: React.FC = () => {
         </div>
       </aside>
 
-      {/* Main Content */}
+      {/* Main */}
       <main className="flex-1 flex flex-col overflow-hidden relative bg-slate-50">
-        {/* Header */}
         <header className="h-16 border-b border-slate-200 bg-white/80 backdrop-blur-md flex items-center justify-between px-8 z-10 sticky top-0">
           <div className="relative">
             <button
-              onClick={() => setIsTenantMenuOpen(!isTenantMenuOpen)}
+              onClick={() => setIsTenantMenuOpen((v) => !v)}
               className="flex items-center gap-2 text-sm font-bold text-slate-700 hover:text-violet-600 transition-colors bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 hover:border-violet-200"
             >
               <span className="w-5 h-5 rounded bg-white flex items-center justify-center text-[9px] border border-slate-200 shadow-sm text-slate-700">
@@ -295,9 +294,13 @@ const App: React.FC = () => {
           </div>
         </header>
 
-        {/* Content */}
         <div className="flex-1 overflow-y-auto p-10 scroll-smooth">
           <div className="max-w-full mx-auto">{renderContent()}</div>
+
+          {/* Debug discreto (se quiser tirar depois) */}
+          <div className="mt-10 text-[11px] text-slate-400 font-semibold">
+            API: {apiBase} • Tenant: {selectedTenant.id}
+          </div>
         </div>
       </main>
     </div>
