@@ -1,17 +1,20 @@
-# ---------- STAGE 1: build ----------
+# ---------- Build stage ----------
 FROM node:20-slim AS build
 WORKDIR /app
 
+# Instala deps
 COPY package.json package-lock.json* ./
 RUN npm ci
 
+# Copia código e builda
 COPY . .
 RUN npm run build
 
-# ---------- STAGE 2: serve ----------
+
+# ---------- Runtime stage ----------
 FROM nginx:alpine
 
-# SPA fallback (React Router / Vite SPA)
+# SPA fallback + porta do Cloud Run
 RUN printf 'server {\n\
   listen 8080;\n\
   server_name _;\n\
