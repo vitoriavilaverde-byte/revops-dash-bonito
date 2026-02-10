@@ -60,7 +60,8 @@ const App = () => {
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard': return <DashboardView apiBase={API_BASE} tenant={selectedTenant} />;
-      case 'framework': return <FrameworkView />;
+      case 'framework':
+      return <FrameworkView tenantId={selectedTenant.id} tenantName={selectedTenant.name} />;
       case 'visitantes': return <VisitorsView />;
       case 'leads': return <LeadsView apiBase={API_BASE} tenant={selectedTenant} />;
       case 'vendas': return <SalesView apiBase={API_BASE} tenant={selectedTenant} />;
