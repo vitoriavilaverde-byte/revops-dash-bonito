@@ -67,7 +67,14 @@ const App = () => {
       case 'pos-vendas': return <PostSalesView />;
       case 'campanhas': return <CampaignsView />;
       case 'timeline': return <TimelineView />;
-      case 'clientes': return <ClientsView />;
+      case 'clientes': 
+      return (
+        <ClientsView
+          tenantId={selectedTenant.id}
+          tenantName={selectedTenant.name}
+          onPublished={() => setActiveTab('framework')}
+        />
+      );
       case 'config': return <SettingsView />;
       case 'feedback': return <FeedbackView />;
       case 'tabela': return <GTMStrategyView />;
