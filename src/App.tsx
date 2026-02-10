@@ -1,226 +1,158 @@
-cd ~/revops-dash-bonito
-cat > src/App.tsx << 'EOF'
-import React, { useMemo, useState } from 'react';
-import {
-  LayoutDashboard, Users, Filter, Download, Calendar, ChevronDown,
-  Settings, Database, MessageSquare, Clock, Briefcase,
-  Target, UserCheck, Layers
-} from 'lucide-react';
+// src/App.tsx
+import React, { useMemo, useState } from "react";
+import { DashboardView } from "./components/DashboardView";
+import { CampaignsView } from "./components/CampaignsView";
+import { VisitorsView } from "./components/VisitorsView";
+import { LeadsView } from "./components/LeadsView";
+import { SalesView } from "./components/SalesView";
+import { PostSalesView } from "./components/PostSalesView";
+import { TimelineView } from "./components/TimelineView";
+import { FrameworkView } from "./components/FrameworkView";
+import { GTMStrategyView } from "./components/GTMStrategyView";
 
-import { TENANTS } from './constants';
-import type { Tenant } from './types';
+// Admin (apenas manager)
+import { ClientsView, SettingsView, FeedbackView } from "./components/AdminViews";
 
-import { DashboardView } from './components/DashboardView';
-import { LeadsView } from './components/LeadsView';
-import { SalesView } from './components/SalesView';
-import { PostSalesView } from './components/PostSalesView';
-import { CampaignsView } from './components/CampaignsView';
-import { TimelineView } from './components/TimelineView';
-import { FrameworkView } from './components/FrameworkView';
-import { LoginView } from './components/LoginView';
-import { GTMStrategyView } from './components/GTMStrategyView';
-import { VisitorsView } from './components/VisitorsView';
+type ViewKey =
+  | "dashboard"
+  | "campaigns"
+  | "visitors"
+  | "leads"
+  | "sales"
+  | "postsales"
+  | "timeline"
+  | "framework"
+  | "gtm"
+  | "admin";
 
-// AdminViews.tsx exporta esses 3 (não existe "AdminViews")
-import { ClientsView, SettingsView, FeedbackView } from './components/AdminViews';
+const NAV: Array<{ key: ViewKey; label: string }> = [
+  { key: "dashboard", label: "Dashboard" },
+  { key: "campaigns", label: "Campanhas" },
+  { key: "visitors", label: "Visitantes" },
+  { key: "leads", label: "Leads" },
+  { key: "sales", label: "Vendas" },
+  { key: "postsales", label: "Pós-vendas" },
+  { key: "timeline", label: "Timeline" },
+  { key: "framework", label: "Framework" },
+  { key: "gtm", label: "GTM Strategy" },
+  { key: "admin", label: "Admin" }, // escondido para "user"
+];
 
-const SidebarItem = ({ icon: Icon, label, active, onClick }: any) => (
-  <button
-    onClick={onClick}
-    className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm font-bold transition-all duration-200 rounded-lg mb-1 ${
-      active
-        ? 'bg-violet-50 text-violet-700 border-r-4 border-violet-600'
-        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-    }`}
-  >
-    <Icon size={18} className={active ? 'text-violet-600' : 'text-slate-500'} />
-    {label}
-  </button>
-);
-
-const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [activeTab, setActiveTab] = useState('dashboard');
-  const [selectedTenant, setSelectedTenant] = useState<Tenant>(TENANTS[0]);
-  const [isTenantMenuOpen, setIsTenantMenuOpen] = useState(false);
 type UserRole = "manager" | "user";
 
-const [role, setRole] = useState<UserRole>(() => {
-  const saved = localStorage.getItem("revops:role");
-  return saved === "manager" || saved === "user" ? saved : "user";
-});
-
-const setUserRole = (r: UserRole) => {
-  setRole(r);
-  localStorage.setItem("revops:role", r);
-};
-  const setUserRole = (r: UserRole) => {
-  setRole(r);
-  localStorage.setItem("revops:role", r);
-};
-  <div className="mt-3 flex gap-2">
-  <button
-    onClick={() => setUserRole("user")}
-    className={`flex-1 text-xs font-bold px-2 py-1 rounded border ${role==="user" ? "bg-violet-600 text-white border-violet-600" : "bg-white text-slate-700 border-slate-200"}`}
-  >
-    User
-  </button>
-  <button
-    onClick={() => setUserRole("manager")}
-    className={`flex-1 text-xs font-bold px-2 py-1 rounded border ${role==="manager" ? "bg-violet-600 text-white border-violet-600" : "bg-white text-slate-700 border-slate-200"}`}
-  >
-    Manager
-  </button>
-</div>
-  // Base da API em produção (mantém “bonito” e pronto pra fetch nos componentes)
-  const API_BASE = useMemo(() => {
+export default function App() {
+  // Mantém API configurada pra prod (e evita "unused")
+  const API = useMemo(() => {
     const base =
       (import.meta as any).env?.VITE_API_URL ||
       (import.meta as any).env?.VITE_API_BASE ||
-      'https://revops-api-614980035835.us-east1.run.app';
-    return String(base).replace(/\/$/, '');
+      "https://revops-api-614980035835.us-east1.run.app";
+    return String(base).replace(/\/$/, "");
   }, []);
 
-  if (!isAuthenticated) {
-    return <LoginView onLogin={() => setIsAuthenticated(true)} />;
-  }
+  const [view, setView] = useState<ViewKey>("dashboard");
 
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'dashboard': return <DashboardView apiBase={API_BASE} tenant={selectedTenant} />;
-      case 'framework':
-      return <FrameworkView tenantId={selectedTenant.id} tenantName={selectedTenant.name} />;
-      case 'visitantes': return <VisitorsView />;
-      case 'leads': return <LeadsView apiBase={API_BASE} tenant={selectedTenant} />;
-      case 'vendas': return <SalesView apiBase={API_BASE} tenant={selectedTenant} />;
-      case 'pos-vendas': return <PostSalesView />;
-      case 'campanhas': return <CampaignsView />;
-      case 'timeline': return <TimelineView />;
-      case 'clientes': 
-      return (
-        <ClientsView
-          tenantId={selectedTenant.id}
-          tenantName={selectedTenant.name}
-          onPublished={() => setActiveTab('framework')}
-        />
-      );
-      case 'config': return <SettingsView />;
-      case 'feedback': return <FeedbackView />;
-      case 'tabela': return <GTMStrategyView />;
-      default: return <DashboardView apiBase={API_BASE} tenant={selectedTenant} />;
-    }
+  // Role (MVP) via localStorage
+  const [role, setRole] = useState<UserRole>(() => {
+    const saved = localStorage.getItem("revops:role");
+    return saved === "manager" || saved === "user" ? saved : "user";
+  });
+
+  const setUserRole = (r: UserRole) => {
+    setRole(r);
+    localStorage.setItem("revops:role", r);
+
+    // se o usuário não é manager e estava no admin, volta pro dashboard
+    if (r !== "manager" && view === "admin") setView("dashboard");
   };
 
   return (
-    <div className="flex h-screen bg-slate-50 text-slate-900 overflow-hidden font-sans selection:bg-violet-200">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-slate-200 flex flex-col shrink-0 shadow-sm z-20">
-        <div className="p-6 flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-violet-200">
-            R
-          </div>
-          <span className="font-bold text-lg tracking-tight text-slate-900">
-            RevOps<span className="text-violet-600">OS</span>
-          </span>
-        </div>
-
-        <div className="flex-1 overflow-y-auto px-3 py-2 space-y-6">
-          <div>
-            <div className="px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Principal</div>
-            <nav className="space-y-0.5">
-              <SidebarItem icon={LayoutDashboard} label="Dashboard" active={activeTab === 'dashboard'} onClick={() => setActiveTab('dashboard')} />
-              <SidebarItem icon={Layers} label="Framework" active={activeTab === 'framework'} onClick={() => setActiveTab('framework')} />
-              <SidebarItem icon={Database} label="Tabela" active={activeTab === 'tabela'} onClick={() => setActiveTab('tabela')} />
-              <SidebarItem icon={Users} label="Visitantes" active={activeTab === 'visitantes'} onClick={() => setActiveTab('visitantes')} />
-              <SidebarItem icon={Filter} label="Leads" active={activeTab === 'leads'} onClick={() => setActiveTab('leads')} />
-              <SidebarItem icon={Briefcase} label="Vendas" active={activeTab === 'vendas'} onClick={() => setActiveTab('vendas')} />
-              <SidebarItem icon={UserCheck} label="Pós-Vendas" active={activeTab === 'pos-vendas'} onClick={() => setActiveTab('pos-vendas')} />
-              <SidebarItem icon={Target} label="Campanhas" active={activeTab === 'campanhas'} onClick={() => setActiveTab('campanhas')} />
-              <SidebarItem icon={Clock} label="Timeline" active={activeTab === 'timeline'} onClick={() => setActiveTab('timeline')} />
-            </nav>
-          </div>
-
-          <div>
-            <div className="px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Administrativo</div>
-            <nav className="space-y-0.5">
-              <SidebarItem icon={Users} label="Gerenciar Clientes" active={activeTab === 'clientes'} onClick={() => setActiveTab('clientes')} />
-              <SidebarItem icon={Settings} label="Configurações" active={activeTab === 'config'} onClick={() => setActiveTab('config')} />
-              <SidebarItem icon={MessageSquare} label="Feedback" active={activeTab === 'feedback'} onClick={() => setActiveTab('feedback')} />
-            </nav>
-          </div>
-        </div>
-
-        <div className="p-4 border-t border-slate-200 bg-slate-50">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-slate-200 to-slate-300 flex items-center justify-center text-xs font-bold text-slate-600 border border-slate-300">
-              JD
-            </div>
-            <div className="flex-1 overflow-hidden">
-              <div className="text-sm font-bold text-slate-700 truncate">John Doe</div>
-              <div className="text-xs text-slate-500 truncate">Admin Workspace</div>
+    <div className="min-h-screen bg-slate-50">
+      <div className="flex">
+        {/* Sidebar */}
+        <aside className="w-64 shrink-0 border-r border-slate-200 bg-white min-h-screen">
+          <div className="p-5 border-b border-slate-100">
+            <div className="text-lg font-extrabold text-slate-900">RevOps</div>
+            <div className="text-xs font-bold text-slate-500 mt-1">MVP</div>
+            <div className="text-[11px] text-slate-500 mt-2">
+              API: <span className="font-mono">{API}</span>
             </div>
           </div>
-        </div>
-      </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 flex flex-col overflow-hidden relative bg-slate-50">
-        {/* Header */}
-        <header className="h-16 border-b border-slate-200 bg-white/80 backdrop-blur-md flex items-center justify-between px-8 z-10 sticky top-0">
-          <div className="relative">
-            <button
-              onClick={() => setIsTenantMenuOpen(!isTenantMenuOpen)}
-              className="flex items-center gap-2 text-sm font-bold text-slate-700 hover:text-violet-600 transition-colors bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 hover:border-violet-200"
-            >
-              <span className="w-5 h-5 rounded bg-white flex items-center justify-center text-[9px] border border-slate-200 shadow-sm text-slate-700">
-                {selectedTenant.logo}
-              </span>
-              {selectedTenant.name}
-              <ChevronDown size={14} className="text-slate-400" />
-            </button>
-
-            {isTenantMenuOpen && (
-              <div className="absolute top-full left-0 mt-2 w-56 bg-white border border-slate-200 rounded-lg shadow-xl py-1 z-50 animate-in fade-in zoom-in-95 duration-100">
-                {TENANTS.map((tenant) => (
+          <nav className="p-3 space-y-1">
+            {NAV.filter((item) => role === "manager" || item.key !== "admin").map(
+              (item) => {
+                const active = item.key === view;
+                return (
                   <button
-                    key={tenant.id}
-                    onClick={() => { setSelectedTenant(tenant); setIsTenantMenuOpen(false); }}
-                    className="w-full text-left px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-violet-50 hover:text-violet-700 flex items-center gap-3 transition-colors"
+                    key={item.key}
+                    onClick={() => setView(item.key)}
+                    className={[
+                      "w-full text-left px-3 py-2 rounded-lg text-sm font-bold transition-colors",
+                      active
+                        ? "bg-violet-50 text-violet-700 border border-violet-100"
+                        : "text-slate-700 hover:bg-slate-50",
+                    ].join(" ")}
                   >
-                    <span className="w-5 h-5 rounded bg-slate-100 flex items-center justify-center text-[9px] border border-slate-200 text-slate-600">
-                      {tenant.logo}
-                    </span>
-                    {tenant.name}
+                    {item.label}
                   </button>
-                ))}
-              </div>
+                );
+              }
             )}
-          </div>
+          </nav>
 
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 bg-white border border-slate-200 rounded-md px-3 py-1.5 text-sm font-bold text-slate-700 cursor-pointer hover:border-violet-300 transition-colors shadow-sm">
-              <Calendar size={14} className="text-violet-500" />
-              <span>Últimos 30 dias</span>
-              <ChevronDown size={12} className="text-slate-500" />
+          {/* Toggle de role (teste) */}
+          <div className="p-3 border-t border-slate-200 bg-slate-50">
+            <div className="text-[10px] font-extrabold text-slate-500 uppercase tracking-widest mb-2">
+              Role (teste)
             </div>
-            <button className="p-2 text-slate-500 hover:text-violet-600 hover:bg-violet-50 rounded-md transition-colors">
-              <Filter size={18} />
-            </button>
-            <button className="flex items-center gap-2 px-3 py-1.5 bg-violet-600 hover:bg-violet-700 text-white rounded-md text-sm font-bold transition-colors shadow-md shadow-violet-200">
-              <Download size={14} />
-              Exportar
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setUserRole("user")}
+                className={`flex-1 text-xs font-extrabold px-2 py-1 rounded border ${
+                  role === "user"
+                    ? "bg-violet-600 text-white border-violet-600"
+                    : "bg-white text-slate-700 border-slate-200"
+                }`}
+              >
+                User
+              </button>
+              <button
+                onClick={() => setUserRole("manager")}
+                className={`flex-1 text-xs font-extrabold px-2 py-1 rounded border ${
+                  role === "manager"
+                    ? "bg-violet-600 text-white border-violet-600"
+                    : "bg-white text-slate-700 border-slate-200"
+                }`}
+              >
+                Manager
+              </button>
+            </div>
           </div>
-        </header>
+        </aside>
 
-        {/* Main Scrollable Area */}
-        <div className="flex-1 overflow-y-auto p-10 scroll-smooth">
-          <div className="max-w-full mx-auto">{renderContent()}</div>
-        </div>
-      </main>
+        {/* Conteúdo */}
+        <main className="flex-1 p-6">
+          {view === "dashboard" && <DashboardView />}
+          {view === "campaigns" && <CampaignsView />}
+          {view === "visitors" && <VisitorsView />}
+          {view === "leads" && <LeadsView />}
+          {view === "sales" && <SalesView />}
+          {view === "postsales" && <PostSalesView />}
+          {view === "timeline" && <TimelineView />}
+          {view === "framework" && <FrameworkView />}
+          {view === "gtm" && <GTMStrategyView />}
+
+          {/* Admin apenas para manager */}
+          {role === "manager" && view === "admin" && (
+            <div className="space-y-10">
+              <ClientsView />
+              <SettingsView />
+              <FeedbackView />
+            </div>
+          )}
+        </main>
+      </div>
     </div>
   );
-};
-
-export default App;
-EOF
+}
