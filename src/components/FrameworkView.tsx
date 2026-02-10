@@ -2,6 +2,7 @@
 import React, { useMemo } from "react";
 import { ArrowUp } from "lucide-react";
 import { loadStrategy } from "../lib/strategyStorage";
+import { TENANTS } from "../constants";
 
 type Unit = "%" | "R$" | "count" | "min" | "days" | string;
 type Layer = "L0" | "L1" | "L2" | "L3";
@@ -106,11 +107,15 @@ const LayerCard: React.FC<{
   </div>
 );
 
-export const FrameworkView: React.FC<{ tenantId: string; tenantName: string }> = ({
+export const FrameworkView: React.FC<{ tenantId?: string; tenantName?: string }> = ({
   tenantId,
   tenantName,
 }) => {
-  const strategy = useMemo(() => loadStrategy(tenantId), [tenantId]);
+  const fallbackTenant = TENANTS?.[0];
+  const tenantIdResolved = tenantId || fallbackTenant?.id || "default";
+  const tenantNameResolved = tenantName || fallbackTenant?.name || "Tenant";
+
+  const strategy = useMemo(() => loadStrategy(tenantIdResolved), [tenantIdResolved]);
 
   const targetsByLayer = useMemo(() => {
     const base: Record<Layer, MetricItem[]> = { L0: [], L1: [], L2: [], L3: [] };
