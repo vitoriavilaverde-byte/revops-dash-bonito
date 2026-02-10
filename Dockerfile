@@ -1,21 +1,23 @@
-# ---------- Build stage ----------
+# ====== stage 1: build ======
 FROM node:20-slim AS build
 WORKDIR /app
 
-# Instala deps
+# instala deps
 COPY package.json package-lock.json* ./
 RUN npm ci
 
-# Copia código e builda
+# copia o código
 COPY . .
+
+# build (gera /app/dist)
 RUN npm run build
 
-
-# ---------- Runtime stage ----------
+# ====== stage 2: serve ======
 FROM nginx:alpine
 
-# SPA fallback + porta do Cloud Run
-RUN printf 'server {\n\
+# SPA fallback (React Router / Vite SPA)
+RUN rm -f /etc/nginx/conf.d/default.conf && \
+  printf 'server {\n\
   listen 8080;\n\
   server_name _;\n\
   root /usr/share/nginx/html;\n\
@@ -25,6 +27,7 @@ RUN printf 'server {\n\
   }\n\
 }\n' > /etc/nginx/conf.d/default.conf
 
+# copia o build pronto
 COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 8080
