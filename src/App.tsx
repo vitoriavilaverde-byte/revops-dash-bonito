@@ -1,3 +1,5 @@
+cd ~/revops-dash-bonito
+cat > src/App.tsx << 'EOF'
 import React, { useMemo, useState } from 'react';
 import {
   LayoutDashboard, Users, Filter, Download, Calendar, ChevronDown,
@@ -14,11 +16,13 @@ import { SalesView } from './components/SalesView';
 import { PostSalesView } from './components/PostSalesView';
 import { CampaignsView } from './components/CampaignsView';
 import { TimelineView } from './components/TimelineView';
-import { ClientsView, SettingsView, FeedbackView } from './components/AdminViews';
 import { FrameworkView } from './components/FrameworkView';
 import { LoginView } from './components/LoginView';
 import { GTMStrategyView } from './components/GTMStrategyView';
 import { VisitorsView } from './components/VisitorsView';
+
+// AdminViews.tsx exporta esses 3 (não existe "AdminViews")
+import { ClientsView, SettingsView, FeedbackView } from './components/AdminViews';
 
 const SidebarItem = ({ icon: Icon, label, active, onClick }: any) => (
   <button
@@ -40,11 +44,11 @@ const App = () => {
   const [selectedTenant, setSelectedTenant] = useState<Tenant>(TENANTS[0]);
   const [isTenantMenuOpen, setIsTenantMenuOpen] = useState(false);
 
-  // ✅ API correta (env > fallback fixo)
+  // Base da API em produção (mantém “bonito” e pronto pra fetch nos componentes)
   const API_BASE = useMemo(() => {
     const base =
-      import.meta.env.VITE_API_URL ||
-      import.meta.env.VITE_API_BASE ||
+      (import.meta as any).env?.VITE_API_URL ||
+      (import.meta as any).env?.VITE_API_BASE ||
       'https://revops-api-614980035835.us-east1.run.app';
     return String(base).replace(/\/$/, '');
   }, []);
@@ -55,11 +59,11 @@ const App = () => {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'dashboard': return <DashboardView />;
+      case 'dashboard': return <DashboardView apiBase={API_BASE} tenant={selectedTenant} />;
       case 'framework': return <FrameworkView />;
       case 'visitantes': return <VisitorsView />;
-      case 'leads': return <LeadsView />;
-      case 'vendas': return <SalesView />;
+      case 'leads': return <LeadsView apiBase={API_BASE} tenant={selectedTenant} />;
+      case 'vendas': return <SalesView apiBase={API_BASE} tenant={selectedTenant} />;
       case 'pos-vendas': return <PostSalesView />;
       case 'campanhas': return <CampaignsView />;
       case 'timeline': return <TimelineView />;
@@ -67,7 +71,7 @@ const App = () => {
       case 'config': return <SettingsView />;
       case 'feedback': return <FeedbackView />;
       case 'tabela': return <GTMStrategyView />;
-      default: return <DashboardView />;
+      default: return <DashboardView apiBase={API_BASE} tenant={selectedTenant} />;
     }
   };
 
@@ -127,7 +131,7 @@ const App = () => {
       <main className="flex-1 flex flex-col overflow-hidden relative bg-slate-50">
         {/* Header */}
         <header className="h-16 border-b border-slate-200 bg-white/80 backdrop-blur-md flex items-center justify-between px-8 z-10 sticky top-0">
-          <div className="relative flex items-center gap-3">
+          <div className="relative">
             <button
               onClick={() => setIsTenantMenuOpen(!isTenantMenuOpen)}
               className="flex items-center gap-2 text-sm font-bold text-slate-700 hover:text-violet-600 transition-colors bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 hover:border-violet-200"
@@ -155,11 +159,6 @@ const App = () => {
                 ))}
               </div>
             )}
-
-            {/* ✅ deixa explícito o endpoint pra você não cair no HTML de novo */}
-            <span className="text-[11px] font-bold text-slate-400 hidden md:inline">
-              API: <span className="text-slate-600">{API_BASE}</span>
-            </span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -172,7 +171,8 @@ const App = () => {
               <Filter size={18} />
             </button>
             <button className="flex items-center gap-2 px-3 py-1.5 bg-violet-600 hover:bg-violet-700 text-white rounded-md text-sm font-bold transition-colors shadow-md shadow-violet-200">
-              <Download size={14} /> Exportar
+              <Download size={14} />
+              Exportar
             </button>
           </div>
         </header>
@@ -187,3 +187,4 @@ const App = () => {
 };
 
 export default App;
+EOF
