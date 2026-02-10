@@ -43,7 +43,29 @@ const App = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [selectedTenant, setSelectedTenant] = useState<Tenant>(TENANTS[0]);
   const [isTenantMenuOpen, setIsTenantMenuOpen] = useState(false);
-
+type UserRole = "manager" | "user";
+const [role, setRole] = useState<UserRole>(() => {
+  const saved = localStorage.getItem("revops:role");
+  return (saved === "manager" || saved === "user") ? saved : "user";
+});
+  const setUserRole = (r: UserRole) => {
+  setRole(r);
+  localStorage.setItem("revops:role", r);
+};
+  <div className="mt-3 flex gap-2">
+  <button
+    onClick={() => setUserRole("user")}
+    className={`flex-1 text-xs font-bold px-2 py-1 rounded border ${role==="user" ? "bg-violet-600 text-white border-violet-600" : "bg-white text-slate-700 border-slate-200"}`}
+  >
+    User
+  </button>
+  <button
+    onClick={() => setUserRole("manager")}
+    className={`flex-1 text-xs font-bold px-2 py-1 rounded border ${role==="manager" ? "bg-violet-600 text-white border-violet-600" : "bg-white text-slate-700 border-slate-200"}`}
+  >
+    Manager
+  </button>
+</div>
   // Base da API em produção (mantém “bonito” e pronto pra fetch nos componentes)
   const API_BASE = useMemo(() => {
     const base =
