@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Save, Users } from "lucide-react";
+import { Save, Users , MessageSquare} from "lucide-react";
 import { templateTargets } from "../strategy/templates";
 import { saveStrategy } from "../strategy/store";
 import type { BusinessModel, Strategy, Target, Layer } from "../strategy/store";
@@ -246,4 +246,3 @@ export const FeedbackView: React.FC = () => (
     </div>
   </div>
 );
-EOF
