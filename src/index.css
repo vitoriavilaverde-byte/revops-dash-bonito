@@ -134,3 +134,50 @@ body{
   box-shadow:var(--shadow);
 }
 .theme-muted{ color:var(--muted); }
+
+/* =========================
+   FORCE CLEAN + HIGH CONTRAST
+   (override global sem mexer nos componentes)
+   ========================= */
+
+:root{
+  --bg:#f8fafc;
+  --panel:#ffffff;
+  --panel-2:#f1f5f9;
+  --text:#0f172a;
+  --muted:#475569;
+  --border:#cbd5e1;
+}
+
+.dark{
+  --bg:#020617;
+  --panel:#0b1220;
+  --panel-2:#0f172a;
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --border:rgba(255,255,255,.14);
+}
+
+html, body { height:100%; }
+body{ background:var(--bg) !important; color:var(--text) !important; }
+
+/* backgrounds comuns do projeto */
+.bg-slate-50, .bg-white{ background-color:var(--panel) !important; }
+.dark .bg-slate-950, .dark .bg-slate-900, .dark .bg-slate-800{ background-color:var(--panel) !important; }
+
+/* bordas */
+.border-slate-200, .border-slate-100{ border-color:var(--border) !important; }
+.dark .border-white\/10{ border-color:var(--border) !important; }
+
+/* textos */
+.text-slate-900{ color:var(--text) !important; }
+.text-slate-500, .text-slate-400{ color:var(--muted) !important; }
+.dark .text-slate-100{ color:var(--text) !important; }
+.dark .text-slate-400{ color:var(--muted) !important; }
+
+/* inputs e selects (pra não ficar “cinza lavado”) */
+input, select, textarea{
+  background-color:var(--panel) !important;
+  color:var(--text) !important;
+  border-color:var(--border) !important;
+}
