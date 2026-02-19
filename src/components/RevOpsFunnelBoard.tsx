@@ -323,7 +323,7 @@ export const RevOpsFunnelBoard: React.FC<RevOpsFunnelBoardProps> = ({
 
                   {/* Bottom: mini bar */}
                   <div className="h-1 w-full bg-black/20 rounded-full overflow-hidden mt-2">
-                    <div className="h-full bg-white/30 w-[80%]" />
+                    <div className="h-full bg-[var(--panel)]/30 w-[80%]" />
                   </div>
                 </div>
 

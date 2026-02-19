@@ -24,14 +24,14 @@ const Pill = ({
   icon: React.ElementType;
   label: string;
 }) => (
-  <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/85 backdrop-blur">
+  <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[var(--panel)]/5 px-3 py-1.5 text-xs font-semibold text-white/85 backdrop-blur">
     <Icon size={14} className="text-cyan-300" />
     <span className="whitespace-nowrap">{label}</span>
   </div>
 );
 
 const Stat = ({ k, v }: { k: string; v: string }) => (
-  <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+  <div className="rounded-xl border border-white/10 bg-[var(--panel)]/5 px-4 py-3">
     <div className="text-[10px] font-bold uppercase tracking-widest text-white/50">
       {k}
     </div>
@@ -107,7 +107,7 @@ const LoginView: React.FC<Props> = ({ onLogin }) => {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/30 backdrop-blur">
+            <div className="rounded-2xl border border-white/10 bg-[var(--panel)]/5 p-6 shadow-2xl shadow-black/30 backdrop-blur">
               <div className="mb-5">
                 <div className="text-sm font-extrabold">Acesso à plataforma</div>
                 <div className="mt-1 text-xs text-white/60">
@@ -202,7 +202,7 @@ const LoginView: React.FC<Props> = ({ onLogin }) => {
         {/* Right: Visual / Branding */}
         <div className="hidden flex-1 items-center justify-center px-8 py-10 lg:flex">
           <div className="w-full max-w-2xl">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl shadow-black/30 backdrop-blur">
+            <div className="rounded-3xl border border-white/10 bg-[var(--panel)]/5 p-8 shadow-2xl shadow-black/30 backdrop-blur">
               <div className="flex items-start justify-between gap-6">
                 <div>
                   <div className="text-2xl font-extrabold tracking-tight">
@@ -252,7 +252,7 @@ const LoginView: React.FC<Props> = ({ onLogin }) => {
                           <span>{row.name}</span>
                           <span className="text-white/35">sync</span>
                         </div>
-                        <div className="mt-2 h-2 rounded-full bg-white/10">
+                        <div className="mt-2 h-2 rounded-full bg-[var(--panel)]/10">
                           <div
                             className={`h-2 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500 ${row.w}`}
                           />
@@ -275,7 +275,7 @@ const LoginView: React.FC<Props> = ({ onLogin }) => {
                     ].map((it) => (
                       <div
                         key={it.label}
-                        className="rounded-xl border border-white/10 bg-white/5 p-4"
+                        className="rounded-xl border border-white/10 bg-[var(--panel)]/5 p-4"
                       >
                         <it.icon size={18} className="text-cyan-300" />
                         <div className="mt-2 text-sm font-extrabold">

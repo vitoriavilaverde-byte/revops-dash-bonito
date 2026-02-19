@@ -18,7 +18,7 @@ export const LeadsView: React.FC = () => {
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Gestão de Leads</h2>
+          <h2 className="text-2xl font-bold text-[var(--text)]">Gestão de Leads</h2>
           <p className="text-slate-600 font-medium mt-1">Qualificação, scoring e performance de canais de aquisição.</p>
         </div>
       </div>
@@ -30,7 +30,7 @@ export const LeadsView: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
           <h3 className="text-sm font-bold text-slate-700 mb-6 uppercase tracking-wide">Geração e Qualificação de Leads</h3>
           <div className="h-80 w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -54,7 +54,7 @@ export const LeadsView: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
           <h3 className="text-sm font-bold text-slate-700 mb-6 uppercase tracking-wide">Distribuição de Lead Score</h3>
           <div className="h-80 w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -78,7 +78,7 @@ export const LeadsView: React.FC = () => {
         <div className="lg:col-span-1 space-y-4">
           <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wide px-1">Métricas de Qualidade</h3>
           {LEAD_QUALITY_METRICS.map((metric, idx) => (
-            <div key={idx} className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex items-center gap-4">
+            <div key={idx} className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-5 shadow-sm flex items-center gap-4">
               <div className={`p-3 rounded-xl bg-slate-50 text-slate-600`}>
                 <metric.icon size={24} className={
                   metric.color === 'blue' ? 'text-blue-500' : 
@@ -86,14 +86,14 @@ export const LeadsView: React.FC = () => {
                 } />
               </div>
               <div>
-                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">{metric.label}</div>
-                <div className="text-xl font-bold text-slate-900">{metric.value}</div>
+                <div className="text-xs font-bold text-[var(--muted)] uppercase tracking-wider">{metric.label}</div>
+                <div className="text-xl font-bold text-[var(--text)]">{metric.value}</div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+        <div className="lg:col-span-2 bg-[var(--panel)] border border-[var(--border)] rounded-xl shadow-sm overflow-hidden">
           <div className="px-6 py-4 border-b border-slate-100">
             <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wide">Performance por Fonte de Lead</h3>
           </div>
@@ -117,7 +117,7 @@ export const LeadsView: React.FC = () => {
                         {row.conversion}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-right text-slate-900 font-bold">{row.cpl}</td>
+                    <td className="px-6 py-4 text-right text-[var(--text)] font-bold">{row.cpl}</td>
                   </tr>
                 ))}
               </tbody>

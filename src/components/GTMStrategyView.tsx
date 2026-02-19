@@ -10,7 +10,7 @@ const GTMBlock = ({ type, label, subLabel, height = 'h-16', width = 'w-full', cl
   } else if (type === 'sales') {
     typeClasses = "bg-cyan-500 text-white shadow-cyan-100";
   } else if (type === 'cs') {
-    typeClasses = "bg-white border-2 border-pink-500 text-pink-600 shadow-pink-50";
+    typeClasses = "bg-[var(--panel)] border-2 border-pink-500 text-pink-600 shadow-pink-50";
   }
 
   return (
@@ -23,7 +23,7 @@ const GTMBlock = ({ type, label, subLabel, height = 'h-16', width = 'w-full', cl
 
 const ColumnHeader = ({ title, subtitle }: { title: string, subtitle: string }) => (
   <div className="text-center mb-4">
-    <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">{title}</div>
+    <div className="text-xs font-bold text-[var(--muted)] uppercase tracking-widest">{title}</div>
     <div className="mt-1 bg-slate-200 text-slate-700 text-[10px] font-bold py-1 px-2 rounded-sm uppercase w-full">
       {subtitle}
     </div>
@@ -35,11 +35,11 @@ export const GTMStrategyView: React.FC = () => {
     <div className="w-full h-full min-h-full bg-slate-50 p-8 animate-in fade-in duration-700">
       <div className="max-w-7xl mx-auto">
         <div className="mb-10">
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">GTM Strategy Map</h2>
-          <p className="text-slate-500 text-sm font-medium">Alinhamento de estratégia de Go-To-Market por ACV e Volume de Deals.</p>
+          <h2 className="text-2xl font-bold text-[var(--text)] mb-2">GTM Strategy Map</h2>
+          <p className="text-[var(--muted)] text-sm font-medium">Alinhamento de estratégia de Go-To-Market por ACV e Volume de Deals.</p>
         </div>
 
-        <div className="relative bg-white border border-slate-200 rounded-xl p-8 overflow-hidden shadow-lg">
+        <div className="relative bg-[var(--panel)] border border-[var(--border)] rounded-xl p-8 overflow-hidden shadow-lg">
           <div className="absolute left-4 top-1/2 -translate-y-1/2 -rotate-90 text-xs font-bold text-slate-400 tracking-widest whitespace-nowrap uppercase">
             Number of Deals per year
           </div>
@@ -59,8 +59,8 @@ export const GTMStrategyView: React.FC = () => {
                   <GTMBlock type="marketing" label="PLG" height="h-24" />
                   <GTMBlock type="cs" label="COMMUNITY" height="h-20" />
                 </div>
-                <div className="absolute bottom-0 right-0 translate-y-1/2 translate-x-1/2 text-[10px] text-slate-600 font-bold bg-white border border-slate-200 rounded px-1.5 z-20 shadow-sm">$5,000</div>
-                <div className="absolute right-0 top-16 bottom-4 border-r border-slate-200 border-dashed"></div>
+                <div className="absolute bottom-0 right-0 translate-y-1/2 translate-x-1/2 text-[10px] text-slate-600 font-bold bg-[var(--panel)] border border-[var(--border)] rounded px-1.5 z-20 shadow-sm">$5,000</div>
+                <div className="absolute right-0 top-16 bottom-4 border-r border-[var(--border)] border-dashed"></div>
               </div>
               <div className="flex-1 flex flex-col relative bg-slate-50/50 rounded-lg p-2 min-h-[500px] border border-slate-100">
                 <ColumnHeader title="SPEED" subtitle="1-to-ALL" />
@@ -69,8 +69,8 @@ export const GTMStrategyView: React.FC = () => {
                   <GTMBlock type="sales" label="1-STAGE" height="h-20" />
                   <GTMBlock type="cs" label="HELPDESK" height="h-16" />
                 </div>
-                <div className="absolute bottom-0 right-0 translate-y-1/2 translate-x-1/2 text-[10px] text-slate-600 font-bold bg-white border border-slate-200 rounded px-1.5 z-20 shadow-sm">$15,000</div>
-                <div className="absolute right-0 top-16 bottom-4 border-r border-slate-200 border-dashed"></div>
+                <div className="absolute bottom-0 right-0 translate-y-1/2 translate-x-1/2 text-[10px] text-slate-600 font-bold bg-[var(--panel)] border border-[var(--border)] rounded px-1.5 z-20 shadow-sm">$15,000</div>
+                <div className="absolute right-0 top-16 bottom-4 border-r border-[var(--border)] border-dashed"></div>
               </div>
               <div className="flex-1 flex flex-col relative bg-slate-50/50 rounded-lg p-2 min-h-[500px] border border-slate-100">
                 <ColumnHeader title="EFFICIENCY" subtitle="1-to-MANY" />
@@ -79,8 +79,8 @@ export const GTMStrategyView: React.FC = () => {
                   <GTMBlock type="sales" label="2-STAGE" height="h-20" />
                   <GTMBlock type="cs" label="VOLUME" height="h-16" />
                 </div>
-                <div className="absolute bottom-0 right-0 translate-y-1/2 translate-x-1/2 text-[10px] text-slate-600 font-bold bg-white border border-slate-200 rounded px-1.5 z-20 shadow-sm">$50,000</div>
-                <div className="absolute right-0 top-16 bottom-4 border-r border-slate-200 border-dashed"></div>
+                <div className="absolute bottom-0 right-0 translate-y-1/2 translate-x-1/2 text-[10px] text-slate-600 font-bold bg-[var(--panel)] border border-[var(--border)] rounded px-1.5 z-20 shadow-sm">$50,000</div>
+                <div className="absolute right-0 top-16 bottom-4 border-r border-[var(--border)] border-dashed"></div>
               </div>
               <div className="flex-1 flex flex-col relative bg-slate-50/50 rounded-lg p-2 min-h-[500px] border border-slate-100">
                 <ColumnHeader title="EFFECTIVE" subtitle="1-to-FEW" />
@@ -89,8 +89,8 @@ export const GTMStrategyView: React.FC = () => {
                   <GTMBlock type="sales" label="FIELD SALES" height="h-20" />
                   <GTMBlock type="cs" label="SEGMENTED" height="h-16" />
                 </div>
-                <div className="absolute bottom-0 right-0 translate-y-1/2 translate-x-1/2 text-[10px] text-slate-600 font-bold bg-white border border-slate-200 rounded px-1.5 z-20 shadow-sm">$150,000</div>
-                <div className="absolute right-0 top-16 bottom-4 border-r border-slate-200 border-dashed"></div>
+                <div className="absolute bottom-0 right-0 translate-y-1/2 translate-x-1/2 text-[10px] text-slate-600 font-bold bg-[var(--panel)] border border-[var(--border)] rounded px-1.5 z-20 shadow-sm">$150,000</div>
+                <div className="absolute right-0 top-16 bottom-4 border-r border-[var(--border)] border-dashed"></div>
               </div>
               <div className="flex-1 flex flex-col relative bg-slate-50/50 rounded-lg p-2 min-h-[500px] border border-slate-100">
                 <ColumnHeader title="SELECTIVE" subtitle="1-to-1" />
@@ -99,12 +99,12 @@ export const GTMStrategyView: React.FC = () => {
                   <GTMBlock type="sales" label="NAMED ACCTS" height="h-20" />
                   <GTMBlock type="cs" label="ACCOUNTS" height="h-16" />
                 </div>
-                <div className="absolute bottom-0 right-0 translate-y-1/2 translate-x-1/2 text-[10px] text-slate-600 font-bold bg-white border border-slate-200 rounded px-1.5 z-20 shadow-sm">$500,000</div>
+                <div className="absolute bottom-0 right-0 translate-y-1/2 translate-x-1/2 text-[10px] text-slate-600 font-bold bg-[var(--panel)] border border-[var(--border)] rounded px-1.5 z-20 shadow-sm">$500,000</div>
               </div>
             </div>
           </div>
           <div className="text-center mt-12 text-xs font-bold text-slate-400 tracking-widest uppercase">Annual Contract Value</div>
-          <div className="absolute right-4 bottom-20 flex flex-col gap-2 text-[10px] font-bold text-slate-500">
+          <div className="absolute right-4 bottom-20 flex flex-col gap-2 text-[10px] font-bold text-[var(--muted)]">
             <div className="flex items-center gap-2"><div className="w-3 h-3 bg-slate-800 rounded-sm"></div> MARKETING GTM</div>
             <div className="flex items-center gap-2"><div className="w-3 h-3 bg-cyan-500 rounded-sm"></div> SALES GTM</div>
             <div className="flex items-center gap-2"><div className="w-3 h-3 border-2 border-pink-500 rounded-sm"></div> CS GTM</div>

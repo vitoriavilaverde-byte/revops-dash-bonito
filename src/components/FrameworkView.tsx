@@ -24,7 +24,7 @@ const LayerCard = ({
       <div
         className="
           relative transform transition-all duration-500 hover:-translate-y-1 hover:shadow-xl
-          bg-white border border-slate-200 rounded-xl p-8
+          bg-[var(--panel)] border border-[var(--border)] rounded-xl p-8
           shadow-sm overflow-hidden
         "
       >
@@ -39,13 +39,13 @@ const LayerCard = ({
               <div className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-slate-400 mb-2">
                 {meta.level}
               </div>
-              <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight">{meta.title}</h3>
+              <h3 className="text-2xl font-extrabold text-[var(--text)] tracking-tight">{meta.title}</h3>
             </div>
           </div>
 
           <div className="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 w-full">
             {metrics.length === 0 ? (
-              <div className="text-slate-500 font-bold">Nenhuma meta publicada para esta camada.</div>
+              <div className="text-[var(--muted)] font-bold">Nenhuma meta publicada para esta camada.</div>
             ) : (
               metrics.map((m) => (
                 <div
@@ -55,7 +55,7 @@ const LayerCard = ({
                   <div className="text-xs font-extrabold text-slate-600">{m.label}</div>
                   <div className="mt-2 flex items-baseline justify-between">
                     <div className="text-lg font-extrabold text-violet-700">
-                      {m.target} <span className="text-xs text-slate-500">{m.unit}</span>
+                      {m.target} <span className="text-xs text-[var(--muted)]">{m.unit}</span>
                     </div>
                     <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
                       {m.cadence || "mensal"}
@@ -86,20 +86,20 @@ export const FrameworkView: React.FC<{ tenantId: string; tenantName: string }> =
     <div className="w-full h-full min-h-full bg-slate-50 p-10 animate-in fade-in duration-700">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-extrabold text-slate-900 mb-3 tracking-tight">
+          <h2 className="text-4xl font-extrabold text-[var(--text)] mb-3 tracking-tight">
             Framework • {tenantName}
           </h2>
 
           {strategy ? (
             <div className="text-slate-600 font-bold">
-              Modelo: <span className="text-slate-900">{strategy.model.toUpperCase()}</span> •
-              Maturidade: <span className="text-slate-900">{strategy.maturity}</span>
-              <div className="mt-2 text-slate-500 font-bold">
+              Modelo: <span className="text-[var(--text)]">{strategy.model.toUpperCase()}</span> •
+              Maturidade: <span className="text-[var(--text)]">{strategy.maturity}</span>
+              <div className="mt-2 text-[var(--muted)] font-bold">
                 Objetivo: <span className="text-slate-700">{strategy.objective}</span>
               </div>
             </div>
           ) : (
-            <div className="text-slate-500 font-bold">
+            <div className="text-[var(--muted)] font-bold">
               Nenhuma estratégia publicada ainda para este tenant. Vá em <span className="text-slate-800">Gerenciar Clientes</span> e clique em <span className="text-slate-800">Publicar no Framework</span>.
             </div>
           )}

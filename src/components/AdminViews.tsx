@@ -53,8 +53,8 @@ export const ClientsView: React.FC<{
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-2xl font-extrabold text-slate-900">Gerenciar Clientes</h2>
-          <p className="text-slate-500 mt-1 font-bold">
+          <h2 className="text-2xl font-extrabold text-[var(--text)]">Gerenciar Clientes</h2>
+          <p className="text-[var(--muted)] mt-1 font-bold">
             Estratégia do tenant: <span className="text-slate-800">{tenantName}</span>
           </p>
         </div>
@@ -67,7 +67,7 @@ export const ClientsView: React.FC<{
         </button>
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-4">
+      <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm space-y-4">
         <div className="grid md:grid-cols-3 gap-4">
           <div>
             <label className="block text-xs font-extrabold text-slate-600 uppercase tracking-widest mb-2">
@@ -76,7 +76,7 @@ export const ClientsView: React.FC<{
             <select
               value={model}
               onChange={(e) => onChangeModel(e.target.value as BusinessModel)}
-              className="w-full bg-white border border-slate-200 rounded-md px-4 py-2 text-slate-900 font-bold focus:outline-none focus:border-violet-400"
+              className="w-full bg-[var(--panel)] border border-[var(--border)] rounded-md px-4 py-2 text-[var(--text)] font-bold focus:outline-none focus:border-violet-400"
             >
               <option value="b2b">B2B</option>
               <option value="b2c">B2C</option>
@@ -91,7 +91,7 @@ export const ClientsView: React.FC<{
             <select
               value={maturity}
               onChange={(e) => setMaturity(e.target.value as any)}
-              className="w-full bg-white border border-slate-200 rounded-md px-4 py-2 text-slate-900 font-bold focus:outline-none focus:border-violet-400"
+              className="w-full bg-[var(--panel)] border border-[var(--border)] rounded-md px-4 py-2 text-[var(--text)] font-bold focus:outline-none focus:border-violet-400"
             >
               <option value="starter">Starter</option>
               <option value="growth">Growth</option>
@@ -106,27 +106,27 @@ export const ClientsView: React.FC<{
             <input
               value={objective}
               onChange={(e) => setObjective(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded-md px-4 py-2 text-slate-900 font-bold focus:outline-none focus:border-violet-400"
+              className="w-full bg-[var(--panel)] border border-[var(--border)] rounded-md px-4 py-2 text-[var(--text)] font-bold focus:outline-none focus:border-violet-400"
             />
           </div>
         </div>
       </div>
 
       {(["L3", "L2", "L1", "L0"] as Layer[]).map((layer) => (
-        <div key={layer} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <div key={layer} className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
           <div className="flex items-center justify-between mb-4">
-            <div className="font-extrabold text-slate-900">{layer}</div>
-            <div className="text-xs font-extrabold text-slate-500 uppercase tracking-widest">
+            <div className="font-extrabold text-[var(--text)]">{layer}</div>
+            <div className="text-xs font-extrabold text-[var(--muted)] uppercase tracking-widest">
               Metas (editáveis)
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-3">
             {grouped[layer].map((t) => (
-              <div key={`${t.layer}:${t.metricKey}`} className="border border-slate-200 rounded-lg p-4 flex items-center justify-between">
+              <div key={`${t.layer}:${t.metricKey}`} className="border border-[var(--border)] rounded-lg p-4 flex items-center justify-between">
                 <div>
-                  <div className="font-extrabold text-slate-900">{t.label}</div>
-                  <div className="text-xs text-slate-500 font-bold">{t.metricKey}</div>
+                  <div className="font-extrabold text-[var(--text)]">{t.label}</div>
+                  <div className="text-xs text-[var(--muted)] font-bold">{t.metricKey}</div>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -134,9 +134,9 @@ export const ClientsView: React.FC<{
                     type="number"
                     value={t.target}
                     onChange={(e) => updateTarget(t.metricKey, t.layer, Number(e.target.value))}
-                    className="w-28 border border-slate-200 rounded-md px-3 py-2 text-slate-900 font-extrabold text-right focus:outline-none focus:border-violet-400"
+                    className="w-28 border border-[var(--border)] rounded-md px-3 py-2 text-[var(--text)] font-extrabold text-right focus:outline-none focus:border-violet-400"
                   />
-                  <span className="text-xs font-extrabold text-slate-500">{t.unit}</span>
+                  <span className="text-xs font-extrabold text-[var(--muted)]">{t.unit}</span>
                 </div>
               </div>
             ))}
@@ -144,7 +144,7 @@ export const ClientsView: React.FC<{
         </div>
       ))}
 
-      <div className="bg-slate-50 border border-slate-200 rounded-xl p-12 text-center text-slate-500">
+      <div className="bg-slate-50 border border-[var(--border)] rounded-xl p-12 text-center text-[var(--muted)]">
         <Users size={48} className="mx-auto mb-4 opacity-20" />
         <p className="font-bold">Depois a gente coloca lista real de clientes e health score.</p>
       </div>
@@ -155,24 +155,24 @@ export const ClientsView: React.FC<{
 export const SettingsView: React.FC = () => (
   <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
     <div>
-      <h2 className="text-2xl font-extrabold text-slate-900">Configurações</h2>
-      <p className="text-slate-500 mt-1">Preferências do sistema e da conta.</p>
+      <h2 className="text-2xl font-extrabold text-[var(--text)]">Configurações</h2>
+      <p className="text-[var(--muted)] mt-1">Preferências do sistema e da conta.</p>
     </div>
 
-    <div className="bg-white border border-slate-200 rounded-xl p-6 space-y-6 shadow-sm">
+    <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 space-y-6 shadow-sm">
       <div>
         <label className="block text-sm font-bold text-slate-600 mb-2">Nome da Empresa</label>
         <input
           type="text"
           defaultValue="RevOps Analytics"
-          className="w-full bg-white border border-slate-200 rounded-md px-4 py-2 text-slate-900 focus:outline-none focus:border-violet-400"
+          className="w-full bg-[var(--panel)] border border-[var(--border)] rounded-md px-4 py-2 text-[var(--text)] focus:outline-none focus:border-violet-400"
         />
       </div>
 
       <div className="grid grid-cols-2 gap-6">
         <div>
           <label className="block text-sm font-bold text-slate-600 mb-2">Moeda Padrão</label>
-          <select className="w-full bg-white border border-slate-200 rounded-md px-4 py-2 text-slate-900 focus:outline-none focus:border-violet-400">
+          <select className="w-full bg-[var(--panel)] border border-[var(--border)] rounded-md px-4 py-2 text-[var(--text)] focus:outline-none focus:border-violet-400">
             <option>BRL (R$)</option>
             <option>USD ($)</option>
             <option>EUR (€)</option>
@@ -180,7 +180,7 @@ export const SettingsView: React.FC = () => (
         </div>
         <div>
           <label className="block text-sm font-bold text-slate-600 mb-2">Fuso Horário</label>
-          <select className="w-full bg-white border border-slate-200 rounded-md px-4 py-2 text-slate-900 focus:outline-none focus:border-violet-400">
+          <select className="w-full bg-[var(--panel)] border border-[var(--border)] rounded-md px-4 py-2 text-[var(--text)] focus:outline-none focus:border-violet-400">
             <option>America/Sao_Paulo</option>
             <option>America/New_York</option>
             <option>Europe/London</option>
@@ -188,7 +188,7 @@ export const SettingsView: React.FC = () => (
         </div>
       </div>
 
-      <div className="pt-4 border-t border-slate-200">
+      <div className="pt-4 border-t border-[var(--border)]">
         <button className="bg-violet-600 hover:bg-violet-700 text-white px-6 py-2 rounded-md text-sm font-extrabold flex items-center gap-2 shadow-sm">
           <Save size={16} /> Salvar Alterações
         </button>
@@ -200,14 +200,14 @@ export const SettingsView: React.FC = () => (
 export const FeedbackView: React.FC = () => (
   <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
     <div>
-      <h2 className="text-2xl font-extrabold text-slate-900">Feedback</h2>
-      <p className="text-slate-500 mt-1">Ajude-nos a melhorar a plataforma.</p>
+      <h2 className="text-2xl font-extrabold text-[var(--text)]">Feedback</h2>
+      <p className="text-[var(--muted)] mt-1">Ajude-nos a melhorar a plataforma.</p>
     </div>
 
-    <div className="bg-white border border-slate-200 rounded-xl p-6 space-y-6 shadow-sm">
+    <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 space-y-6 shadow-sm">
       <div>
         <label className="block text-sm font-bold text-slate-600 mb-2">Tipo de Feedback</label>
-        <select className="w-full bg-white border border-slate-200 rounded-md px-4 py-2 text-slate-900 focus:outline-none focus:border-violet-400">
+        <select className="w-full bg-[var(--panel)] border border-[var(--border)] rounded-md px-4 py-2 text-[var(--text)] focus:outline-none focus:border-violet-400">
           <option>Sugestão</option>
           <option>Bug</option>
           <option>Dúvida</option>
@@ -220,11 +220,11 @@ export const FeedbackView: React.FC = () => (
         <textarea
           rows={6}
           placeholder="Descreva seu feedback..."
-          className="w-full bg-white border border-slate-200 rounded-md px-4 py-2 text-slate-900 focus:outline-none focus:border-violet-400 resize-none"
+          className="w-full bg-[var(--panel)] border border-[var(--border)] rounded-md px-4 py-2 text-[var(--text)] focus:outline-none focus:border-violet-400 resize-none"
         />
       </div>
 
-      <div className="pt-4 border-t border-slate-200">
+      <div className="pt-4 border-t border-[var(--border)]">
         <button className="bg-violet-600 hover:bg-violet-700 text-white px-6 py-2 rounded-md text-sm font-extrabold flex items-center gap-2 shadow-sm">
           <MessageSquare size={16} /> Enviar Feedback
         </button>
@@ -232,14 +232,14 @@ export const FeedbackView: React.FC = () => (
     </div>
 
     <div className="space-y-3">
-      <h3 className="text-xs font-extrabold text-slate-500 uppercase tracking-widest">Histórico Recente</h3>
-      <div className="bg-white border border-slate-200 rounded-xl p-4 flex gap-4 opacity-90 shadow-sm">
+      <h3 className="text-xs font-extrabold text-[var(--muted)] uppercase tracking-widest">Histórico Recente</h3>
+      <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-4 flex gap-4 opacity-90 shadow-sm">
         <div className="p-2 bg-violet-50 rounded text-violet-700 h-fit border border-violet-100">
           <MessageSquare size={16} />
         </div>
         <div>
-          <div className="text-sm font-extrabold text-slate-900">Sugestão de melhoria</div>
-          <div className="text-xs text-slate-500 mb-1">Há 2 dias</div>
+          <div className="text-sm font-extrabold text-[var(--text)]">Sugestão de melhoria</div>
+          <div className="text-xs text-[var(--muted)] mb-1">Há 2 dias</div>
           <p className="text-sm text-slate-600">Adicionar filtros avançados no dashboard...</p>
         </div>
       </div>

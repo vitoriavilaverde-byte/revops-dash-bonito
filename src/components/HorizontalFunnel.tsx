@@ -65,11 +65,11 @@ export const HorizontalFunnel: React.FC<HorizontalFunnelProps> = ({ data }) => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
-        <div className="flex gap-2 bg-white p-1 rounded-lg border border-slate-200 shadow-sm">
-          <button onClick={() => setActiveCohort('ALL')} className={cn("px-4 py-1.5 text-sm font-bold rounded-md transition-all", activeCohort === 'ALL' ? "bg-blue-600 text-white shadow-md" : "text-slate-500 hover:text-slate-900")}>Todos</button>
-          <button onClick={() => setActiveCohort('ACQUISITION')} className={cn("px-4 py-1.5 text-sm font-bold rounded-md transition-all", activeCohort === 'ACQUISITION' ? "bg-violet-600 text-white shadow-md" : "text-slate-500 hover:text-slate-900")}>Aquisição</button>
-          <button onClick={() => setActiveCohort('RETENTION')} className={cn("px-4 py-1.5 text-sm font-bold rounded-md transition-all", activeCohort === 'RETENTION' ? "bg-orange-500 text-white shadow-md" : "text-slate-500 hover:text-slate-900")}>Pós-Vendas</button>
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-50 p-4 rounded-xl border border-[var(--border)]">
+        <div className="flex gap-2 bg-[var(--panel)] p-1 rounded-lg border border-[var(--border)] shadow-sm">
+          <button onClick={() => setActiveCohort('ALL')} className={cn("px-4 py-1.5 text-sm font-bold rounded-md transition-all", activeCohort === 'ALL' ? "bg-blue-600 text-white shadow-md" : "text-[var(--muted)] hover:text-[var(--text)]")}>Todos</button>
+          <button onClick={() => setActiveCohort('ACQUISITION')} className={cn("px-4 py-1.5 text-sm font-bold rounded-md transition-all", activeCohort === 'ACQUISITION' ? "bg-violet-600 text-white shadow-md" : "text-[var(--muted)] hover:text-[var(--text)]")}>Aquisição</button>
+          <button onClick={() => setActiveCohort('RETENTION')} className={cn("px-4 py-1.5 text-sm font-bold rounded-md transition-all", activeCohort === 'RETENTION' ? "bg-orange-500 text-white shadow-md" : "text-[var(--muted)] hover:text-[var(--text)]")}>Pós-Vendas</button>
         </div>
 
         {dynamicKPIs && (
@@ -78,21 +78,21 @@ export const HorizontalFunnel: React.FC<HorizontalFunnelProps> = ({ data }) => {
               <div className="p-2 bg-violet-100 rounded-lg text-violet-600"><Users size={18} /></div>
               <div>
                 <span className="block text-slate-600 text-xs font-bold uppercase">Pessoas Únicas</span>
-                <span className="font-bold text-slate-900 text-lg">{dynamicKPIs.visitors}</span>
+                <span className="font-bold text-[var(--text)] text-lg">{dynamicKPIs.visitors}</span>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <div className="p-2 bg-amber-100 rounded-lg text-amber-600"><MousePointerClick size={18} /></div>
               <div>
                 <span className="block text-slate-600 text-xs font-bold uppercase">Conversão Total</span>
-                <span className="font-bold text-slate-900 text-lg">{dynamicKPIs.conversion}</span>
+                <span className="font-bold text-[var(--text)] text-lg">{dynamicKPIs.conversion}</span>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <div className="p-2 bg-emerald-100 rounded-lg text-emerald-600"><DollarSign size={18} /></div>
               <div>
                 <span className="block text-slate-600 text-xs font-bold uppercase">Receita Est.</span>
-                <span className="font-bold text-slate-900 text-lg">{dynamicKPIs.revenue}</span>
+                <span className="font-bold text-[var(--text)] text-lg">{dynamicKPIs.revenue}</span>
               </div>
             </div>
           </div>
@@ -134,7 +134,7 @@ export const HorizontalFunnel: React.FC<HorizontalFunnelProps> = ({ data }) => {
             return (
               <div key={step.id} className="flex flex-col items-center justify-center group relative w-full max-w-[100px]">
                 {isSelected && (
-                  <div className="absolute -top-10 z-20 w-8 h-8 rounded-full bg-white text-violet-600 font-bold flex items-center justify-center shadow-lg border-2 border-violet-600 animate-bounce">{selectionIndex}</div>
+                  <div className="absolute -top-10 z-20 w-8 h-8 rounded-full bg-[var(--panel)] text-violet-600 font-bold flex items-center justify-center shadow-lg border-2 border-violet-600 animate-bounce">{selectionIndex}</div>
                 )}
                 <div onClick={() => handleStageClick(step.id)} style={{ height: `${step.height}px` }} className={cn("w-full rounded-lg cursor-pointer transition-all duration-300 relative shadow-lg border-t border-white/30", gradientClass, isSelected ? "ring-4 ring-violet-200 scale-105 z-10" : "hover:scale-105 hover:z-10 hover:shadow-xl")}>
                   <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent pointer-events-none rounded-lg"></div>
@@ -144,7 +144,7 @@ export const HorizontalFunnel: React.FC<HorizontalFunnelProps> = ({ data }) => {
                   </div>
                 </div>
                 {stepConversion && (
-                  <div className="mt-3 px-2 py-1 bg-slate-100 rounded-md text-[10px] font-bold text-slate-700 border border-slate-200 shadow-sm">{stepConversion}%</div>
+                  <div className="mt-3 px-2 py-1 bg-slate-100 rounded-md text-[10px] font-bold text-slate-700 border border-[var(--border)] shadow-sm">{stepConversion}%</div>
                 )}
               </div>
             );

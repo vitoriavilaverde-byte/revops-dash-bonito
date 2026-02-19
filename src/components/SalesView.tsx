@@ -18,7 +18,7 @@ export const SalesView: React.FC = () => {
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Performance Comercial</h2>
+          <h2 className="text-2xl font-bold text-[var(--text)]">Performance Comercial</h2>
           <p className="text-slate-600 font-medium mt-1">Acompanhamento de vendas, pipeline e produtividade do time.</p>
         </div>
       </div>
@@ -30,7 +30,7 @@ export const SalesView: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
           <h3 className="text-sm font-bold text-slate-700 mb-6 uppercase tracking-wide">Tendência de Vendas e Receita</h3>
           <div className="h-80 w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -48,7 +48,7 @@ export const SalesView: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
           <h3 className="text-sm font-bold text-slate-700 mb-6 uppercase tracking-wide">Pipeline por Estágio</h3>
           <div className="h-80 w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -65,7 +65,7 @@ export const SalesView: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm flex flex-col">
           <h3 className="text-sm font-bold text-slate-700 mb-6 uppercase tracking-wide">Análise de Ganhos e Perdas</h3>
           <div className="flex-1 flex items-center justify-center">
             <ResponsiveContainer width="100%" height={200}>
@@ -86,13 +86,13 @@ export const SalesView: React.FC = () => {
                   <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div>
                   <span className="text-slate-600 font-bold">{item.name}</span>
                 </div>
-                <span className="text-slate-900 font-extrabold">{item.value}</span>
+                <span className="text-[var(--text)] font-extrabold">{item.value}</span>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+        <div className="lg:col-span-2 bg-[var(--panel)] border border-[var(--border)] rounded-xl shadow-sm overflow-hidden">
           <div className="px-6 py-4 border-b border-slate-100">
             <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wide">Top Vendedores</h3>
           </div>
@@ -110,13 +110,13 @@ export const SalesView: React.FC = () => {
                 {TOP_SELLERS_DATA.map((row, idx) => (
                   <tr key={idx} className="hover:bg-slate-50 transition-colors">
                     <td className="px-6 py-4 flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600 border border-slate-200">
+                      <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600 border border-[var(--border)]">
                         {row.rank}
                       </div>
                       <span className="font-bold text-slate-800">{row.name}</span>
                     </td>
                     <td className="px-6 py-4 text-right text-slate-700 font-bold">{row.sales}</td>
-                    <td className="px-6 py-4 text-right text-slate-900 font-bold">R$ {row.revenue.toLocaleString()}</td>
+                    <td className="px-6 py-4 text-right text-[var(--text)] font-bold">R$ {row.revenue.toLocaleString()}</td>
                     <td className="px-6 py-4 text-right">
                       <span className="px-2 py-1 rounded-md bg-violet-50 text-violet-600 font-bold text-xs">
                         {row.winRate}%

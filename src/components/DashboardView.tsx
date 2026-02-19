@@ -89,7 +89,7 @@ const CopilotPanel = () => {
           <BrainCircuit size={20} />
         </div>
         <div>
-          <h3 className="text-lg font-bold text-slate-900">RevOps Copilot Insights</h3>
+          <h3 className="text-lg font-bold text-[var(--text)]">RevOps Copilot Insights</h3>
           <p className="text-xs text-slate-600 font-bold uppercase tracking-wider">
             Análise de Inteligência em Tempo Real
           </p>
@@ -98,32 +98,32 @@ const CopilotPanel = () => {
 
       <div className="space-y-4">
         {insights.map((insight, idx) => (
-          <div key={idx} className="bg-white border border-violet-100 rounded-xl p-5 shadow-sm">
+          <div key={idx} className="bg-[var(--panel)] border border-violet-100 rounded-xl p-5 shadow-sm">
             <div className="flex items-center gap-2 mb-3">
               <Sparkles size={16} className="text-violet-600" />
-              <h4 className="font-bold text-slate-900">{insight.title}</h4>
+              <h4 className="font-bold text-[var(--text)]">{insight.title}</h4>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="text-[10px] font-bold text-slate-500 uppercase block mb-1">
+                <span className="text-[10px] font-bold text-[var(--muted)] uppercase block mb-1">
                   Diagnóstico
                 </span>
                 <p className="text-slate-700 font-medium">{insight.diagnosis}</p>
               </div>
               <div>
-                <span className="text-[10px] font-bold text-slate-500 uppercase block mb-1">
+                <span className="text-[10px] font-bold text-[var(--muted)] uppercase block mb-1">
                   Hipótese
                 </span>
                 <p className="text-slate-700 font-medium">{insight.hypothesis}</p>
               </div>
               <div>
-                <span className="text-[10px] font-bold text-slate-500 uppercase block mb-1">
+                <span className="text-[10px] font-bold text-[var(--muted)] uppercase block mb-1">
                   Ação recomendada
                 </span>
                 <p className="text-slate-800 font-bold text-violet-700">{insight.action}</p>
               </div>
               <div>
-                <span className="text-[10px] font-bold text-slate-500 uppercase block mb-1">
+                <span className="text-[10px] font-bold text-[var(--muted)] uppercase block mb-1">
                   Impacto esperado
                 </span>
                 <p className="text-slate-700 font-medium">{insight.expected_impact}</p>
@@ -159,12 +159,12 @@ const MetricTile = ({
           ? "text-pink-600"
           : color === "blue"
           ? "text-cyan-600"
-          : "text-slate-900"
+          : "text-[var(--text)]"
       }`}
     >
       {value}
-      {trend === "down" && <ArrowDown size={28} className="text-slate-500 stroke-[1.5]" />}
-      {trend === "up" && <ArrowUp size={28} className="text-slate-500 stroke-[1.5]" />}
+      {trend === "down" && <ArrowDown size={28} className="text-[var(--muted)] stroke-[1.5]" />}
+      {trend === "up" && <ArrowUp size={28} className="text-[var(--muted)] stroke-[1.5]" />}
     </div>
     {subtext && <div className="text-xs text-slate-600 mt-2 font-mono font-bold">{subtext}</div>}
   </div>
@@ -190,7 +190,7 @@ const BarIndicator = ({ label, activeIndex }: { label: string; activeIndex: numb
 
 const MatrixGrid = () => (
   <div className="relative p-2">
-    <div className="grid grid-cols-3 gap-1 border border-slate-200 bg-white aspect-square p-1 rounded-lg shadow-lg">
+    <div className="grid grid-cols-3 gap-1 border border-[var(--border)] bg-[var(--panel)] aspect-square p-1 rounded-lg shadow-lg">
       <div className="absolute -top-6 left-0 w-full flex justify-between px-6 text-[9px] text-slate-600 font-mono tracking-widest font-bold">
         <span>PEQ</span>
         <span>MED</span>
@@ -223,9 +223,9 @@ const MatrixGrid = () => (
 const FunnelBar = ({ label, height, color }: { label: string; height: number; color: string }) => (
   <div className="flex flex-col items-center justify-end h-32 w-full group relative">
     <div className={`w-full rounded-t-sm transition-all duration-700 group-hover:brightness-110 ${color} shadow-sm`} style={{ height: `${height}%` }}>
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-white/50" />
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-[var(--panel)]/50" />
     </div>
-    <div className="mt-3 text-[9px] uppercase tracking-widest text-slate-600 text-center font-bold group-hover:text-slate-900 transition-colors">
+    <div className="mt-3 text-[9px] uppercase tracking-widest text-slate-600 text-center font-bold group-hover:text-[var(--text)] transition-colors">
       {label}
     </div>
   </div>
@@ -311,7 +311,7 @@ export const DashboardView: React.FC = () => {
   const cr3 = n(kpis?.cr_sql_to_won);
 
   return (
-    <div className="w-full h-full min-h-full bg-slate-50 text-slate-900 p-8 font-sans selection:bg-cyan-200 animate-in fade-in duration-700">
+    <div className="w-full h-full min-h-full bg-slate-50 text-[var(--text)] p-8 font-sans selection:bg-cyan-200 animate-in fade-in duration-700">
       <CopilotPanel />
 
       <div className="text-[10px] uppercase tracking-[0.2em] text-slate-600 font-bold mb-3">
@@ -327,24 +327,24 @@ export const DashboardView: React.FC = () => {
         </div>
       )}
 
-      <header className="flex justify-between items-end border-b border-slate-200 pb-6 mb-10">
+      <header className="flex justify-between items-end border-b border-[var(--border)] pb-6 mb-10">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center gap-3">
+          <h1 className="text-2xl font-bold tracking-tight text-[var(--text)] flex items-center gap-3">
             STATUS DE CRESCIMENTO:
             <span className="text-cyan-600 border-b-2 border-cyan-500 pb-0.5">MVP ONLINE</span>
           </h1>
         </div>
-        <div className="text-xs text-slate-500 font-mono tracking-widest font-bold">POWERED BY REVOPS OS™</div>
+        <div className="text-xs text-[var(--muted)] font-mono tracking-widest font-bold">POWERED BY REVOPS OS™</div>
       </header>
 
       <div className="grid grid-cols-12 gap-10">
         {/* Left column */}
-        <div className="col-span-12 lg:col-span-2 flex flex-col gap-10 border-r border-slate-200 pr-6">
+        <div className="col-span-12 lg:col-span-2 flex flex-col gap-10 border-r border-[var(--border)] pr-6">
           <MetricTile label="Leads" value={String(leads)} trend="up" color="blue" subtext={`client_id=${tenant}`} />
           <MetricTile label="MQL" value={String(mql)} trend="up" />
           <MetricTile label="SQL" value={String(sql)} trend="up" />
           <BarIndicator label="Estado de Crescimento" activeIndex={4} />
-          <div className="mt-auto pt-8 border-t border-slate-200">
+          <div className="mt-auto pt-8 border-t border-[var(--border)]">
             <div className="text-[10px] uppercase tracking-[0.2em] text-slate-600 font-bold mb-2">Receita (Won)</div>
             <div className="text-3xl font-mono text-cyan-600 tracking-tight font-bold">
               {revenue.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
@@ -359,7 +359,7 @@ export const DashboardView: React.FC = () => {
 
         {/* Center */}
         <div className="col-span-12 lg:col-span-7 flex flex-col px-4">
-          <div className="h-[450px] w-full relative bg-white rounded-xl border border-slate-200 p-6 shadow-lg">
+          <div className="h-[450px] w-full relative bg-[var(--panel)] rounded-xl border border-[var(--border)] p-6 shadow-lg">
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart data={S_CURVE_DATA} margin={{ top: 20, right: 20, bottom: 20, left: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
@@ -408,10 +408,10 @@ export const DashboardView: React.FC = () => {
         </div>
 
         {/* Right */}
-        <div className="col-span-12 lg:col-span-3 flex flex-col gap-12 border-l border-slate-200 pl-6">
+        <div className="col-span-12 lg:col-span-3 flex flex-col gap-12 border-l border-[var(--border)] pl-6">
           <div>
-            <div className="flex justify-between items-center mb-8 border-b border-slate-200 pb-3">
-              <div className="text-[10px] uppercase tracking-[0.2em] text-slate-900 font-bold">Status de GTM</div>
+            <div className="flex justify-between items-center mb-8 border-b border-[var(--border)] pb-3">
+              <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--text)] font-bold">Status de GTM</div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-cyan-600 font-bold">
                 {funnel ? "OK" : "—"}
               </div>
@@ -446,12 +446,12 @@ export const DashboardView: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-16 pt-10 border-t border-slate-200">
-        <h3 className="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
+      <div className="mt-16 pt-10 border-t border-[var(--border)]">
+        <h3 className="text-lg font-bold text-[var(--text)] mb-6 flex items-center gap-2">
           <Activity size={20} className="text-cyan-600" />
           Funil de Conversão Interativo
         </h3>
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-lg">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-lg">
           <HorizontalFunnel data={HORIZONTAL_FUNNEL_DATA} />
         </div>
       </div>

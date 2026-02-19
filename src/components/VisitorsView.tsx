@@ -19,8 +19,8 @@ export const VisitorsView: React.FC = () => {
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Análise de Visitantes</h2>
-          <p className="text-slate-500 mt-1">Métricas de tráfego, engajamento e comportamento.</p>
+          <h2 className="text-2xl font-bold text-[var(--text)]">Análise de Visitantes</h2>
+          <p className="text-[var(--muted)] mt-1">Métricas de tráfego, engajamento e comportamento.</p>
         </div>
       </div>
 
@@ -32,7 +32,7 @@ export const VisitorsView: React.FC = () => {
       </div>
 
       {/* Weekly Traffic Evolution */}
-      <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+      <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
         <h3 className="text-sm font-bold text-slate-700 mb-6 uppercase tracking-wide">Evolução Temporal do Tráfego Semanal</h3>
         <div className="h-80 w-full">
           <ResponsiveContainer width="100%" height="100%">
@@ -63,7 +63,7 @@ export const VisitorsView: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Traffic Source Chart */}
-        <div className="bg-white border border-slate-200 rounded-xl p-6 h-80 flex flex-col shadow-sm">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 h-80 flex flex-col shadow-sm">
           <h3 className="text-sm font-bold text-slate-700 mb-4 uppercase tracking-wide">Origem de Tráfego</h3>
           <div className="flex-1 w-full min-h-0">
             <ResponsiveContainer width="100%" height="100%">
@@ -91,7 +91,7 @@ export const VisitorsView: React.FC = () => {
         </div>
 
         {/* Devices Chart */}
-        <div className="bg-white border border-slate-200 rounded-xl p-6 h-80 flex flex-col shadow-sm">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 h-80 flex flex-col shadow-sm">
           <h3 className="text-sm font-bold text-slate-700 mb-4 uppercase tracking-wide">Dispositivos</h3>
           <div className="flex-1 w-full min-h-0">
             <ResponsiveContainer width="100%" height="100%">
@@ -115,7 +115,7 @@ export const VisitorsView: React.FC = () => {
       </div>
 
       {/* Top Pages Section */}
-      <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+      <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
         <h3 className="text-sm font-bold text-slate-700 mb-6 uppercase tracking-wide">Páginas Mais Visitadas</h3>
         <div className="space-y-6">
           {TOP_PAGES_DATA.map((page, index) => {
@@ -125,7 +125,7 @@ export const VisitorsView: React.FC = () => {
               <div key={index} className="w-full">
                 <div className="flex justify-between items-end mb-2">
                   <span className="text-sm text-slate-700 font-medium">{page.path}</span>
-                  <span className="text-xs text-slate-500 font-semibold">{page.views.toLocaleString()} visualizações</span>
+                  <span className="text-xs text-[var(--muted)] font-semibold">{page.views.toLocaleString()} visualizações</span>
                 </div>
                 <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
                   <div 

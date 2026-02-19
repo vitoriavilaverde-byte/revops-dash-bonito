@@ -20,16 +20,16 @@ export const CampaignsView: React.FC = () => {
     <div className="space-y-8 animate-in fade-in duration-500">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Performance de Campanhas</h2>
+          <h2 className="text-2xl font-bold text-[var(--text)]">Performance de Campanhas</h2>
           <p className="text-slate-600 font-medium mt-1">Análise detalhada por canal, ROI e atribuição de receita.</p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 bg-white border border-slate-200 rounded-md px-3 py-1.5 text-sm font-bold text-slate-700 cursor-pointer hover:border-violet-300 transition-colors shadow-sm">
+          <div className="flex items-center gap-2 bg-[var(--panel)] border border-[var(--border)] rounded-md px-3 py-1.5 text-sm font-bold text-slate-700 cursor-pointer hover:border-violet-300 transition-colors shadow-sm">
             <Calendar size={14} className="text-violet-500" />
             <span>Últimos 30 dias</span>
             <ChevronDown size={12} className="text-slate-400" />
           </div>
-          <button className="p-2 text-slate-400 hover:text-violet-600 hover:bg-violet-50 rounded-md transition-colors border border-slate-200 bg-white shadow-sm">
+          <button className="p-2 text-slate-400 hover:text-violet-600 hover:bg-violet-50 rounded-md transition-colors border border-[var(--border)] bg-[var(--panel)] shadow-sm">
             <Filter size={18} />
           </button>
           <button className="flex items-center gap-2 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-md text-sm font-bold transition-colors shadow-md shadow-violet-200">
@@ -46,9 +46,9 @@ export const CampaignsView: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
           <h3 className="text-sm font-bold text-slate-700 mb-1 uppercase tracking-wide">Tendência de Receita e Pipeline</h3>
-          <p className="text-xs text-slate-500 font-bold mb-6">Receita fechada vs. prevista e pipeline aberto</p>
+          <p className="text-xs text-[var(--muted)] font-bold mb-6">Receita fechada vs. prevista e pipeline aberto</p>
           <div className="h-80 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={REVENUE_PIPELINE_TREND_DATA}>
@@ -63,9 +63,9 @@ export const CampaignsView: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
           <h3 className="text-sm font-bold text-slate-700 mb-1 uppercase tracking-wide">Funil de Conversão</h3>
-          <p className="text-xs text-slate-500 font-bold mb-6">Taxa de conversão entre estágios</p>
+          <p className="text-xs text-[var(--muted)] font-bold mb-6">Taxa de conversão entre estágios</p>
           <div className="h-80 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={CONVERSION_FUNNEL_DATA} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
@@ -77,18 +77,18 @@ export const CampaignsView: React.FC = () => {
               </BarChart>
             </ResponsiveContainer>
           </div>
-          <div className="flex justify-between mt-4 pt-4 border-t border-slate-100 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-            <div className="text-center">Lead → SQL<br/><span className="text-slate-900 text-sm">20.0%</span></div>
-            <div className="text-center">SQL → Oportunidade<br/><span className="text-slate-900 text-sm">40.0%</span></div>
-            <div className="text-center">Oportunidade → Fechado<br/><span className="text-slate-900 text-sm">19.9%</span></div>
+          <div className="flex justify-between mt-4 pt-4 border-t border-slate-100 text-[10px] font-bold text-[var(--muted)] uppercase tracking-wider">
+            <div className="text-center">Lead → SQL<br/><span className="text-[var(--text)] text-sm">20.0%</span></div>
+            <div className="text-center">SQL → Oportunidade<br/><span className="text-[var(--text)] text-sm">40.0%</span></div>
+            <div className="text-center">Oportunidade → Fechado<br/><span className="text-[var(--text)] text-sm">19.9%</span></div>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
           <h3 className="text-sm font-bold text-slate-700 mb-1 uppercase tracking-wide">Velocidade do Pipeline</h3>
-          <p className="text-xs text-slate-500 font-bold mb-6">Tempo médio de conversão por estágio</p>
+          <p className="text-xs text-[var(--muted)] font-bold mb-6">Tempo médio de conversão por estágio</p>
           <div className="h-80 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={PIPELINE_VELOCITY_DATA}>
@@ -105,9 +105,9 @@ export const CampaignsView: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
           <h3 className="text-sm font-bold text-slate-700 mb-1 uppercase tracking-wide">Atribuição de Receita por Canal</h3>
-          <p className="text-xs text-slate-500 font-bold mb-6">Modelo multi-touch (último clique)</p>
+          <p className="text-xs text-[var(--muted)] font-bold mb-6">Modelo multi-touch (último clique)</p>
           <div className="h-80 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -124,10 +124,10 @@ export const CampaignsView: React.FC = () => {
         </div>
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl shadow-sm overflow-hidden">
         <div className="px-6 py-4 border-b border-slate-100">
           <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wide">Performance de Campanhas</h3>
-          <p className="text-xs text-slate-500 font-bold mt-1">Análise detalhada por canal e ROI</p>
+          <p className="text-xs text-[var(--muted)] font-bold mt-1">Análise detalhada por canal e ROI</p>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left">
@@ -158,7 +158,7 @@ export const CampaignsView: React.FC = () => {
                   <td className="px-6 py-4 text-right text-slate-700 font-bold">R$ {row.investment.toLocaleString()}</td>
                   <td className="px-6 py-4 text-right text-slate-700 font-bold">{row.leads}</td>
                   <td className="px-6 py-4 text-right text-slate-700 font-bold">{row.opportunities}</td>
-                  <td className="px-6 py-4 text-right text-slate-900 font-bold">R$ {row.revenue.toLocaleString()}</td>
+                  <td className="px-6 py-4 text-right text-[var(--text)] font-bold">R$ {row.revenue.toLocaleString()}</td>
                   <td className="px-6 py-4 text-right">
                     <span className="text-emerald-600 font-bold">{row.roi}%</span>
                   </td>
@@ -170,32 +170,32 @@ export const CampaignsView: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-2 bg-emerald-100 rounded-lg text-emerald-600"><TrendingUp size={20} /></div>
-            <h4 className="font-bold text-slate-900">Top Performing Channel</h4>
+            <h4 className="font-bold text-[var(--text)]">Top Performing Channel</h4>
           </div>
-          <div className="text-xl font-bold text-slate-900 mb-1">Email Marketing</div>
+          <div className="text-xl font-bold text-[var(--text)] mb-1">Email Marketing</div>
           <div className="text-emerald-600 font-bold text-sm mb-2">ROI de 3,957%</div>
           <p className="text-xs text-slate-600 font-bold">389 leads gerados este mês</p>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-2 bg-blue-100 rounded-lg text-blue-600"><DollarSign size={20} /></div>
-            <h4 className="font-bold text-slate-900">Pipeline de Receita</h4>
+            <h4 className="font-bold text-[var(--text)]">Pipeline de Receita</h4>
           </div>
-          <div className="text-xl font-bold text-slate-900 mb-1">R$ 2.1M</div>
+          <div className="text-xl font-bold text-[var(--text)] mb-1">R$ 2.1M</div>
           <div className="text-emerald-600 font-bold text-sm mb-2">+15.2% vs. mês anterior</div>
           <p className="text-xs text-slate-600 font-bold">287 oportunidades em negociação</p>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <div className="bg-[var(--panel)] border border-[var(--border)] rounded-xl p-6 shadow-sm">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-2 bg-violet-100 rounded-lg text-violet-600"><Target size={20} /></div>
-            <h4 className="font-bold text-slate-900">Taxa de Conversão Geral</h4>
+            <h4 className="font-bold text-[var(--text)]">Taxa de Conversão Geral</h4>
           </div>
-          <div className="text-xl font-bold text-slate-900 mb-1">3.2%</div>
+          <div className="text-xl font-bold text-[var(--text)] mb-1">3.2%</div>
           <div className="text-emerald-600 font-bold text-sm mb-2">+0.4pp vs. mês anterior</div>
           <p className="text-xs text-slate-600 font-bold">143 deals fechados de 4,482 MQLs</p>
         </div>
